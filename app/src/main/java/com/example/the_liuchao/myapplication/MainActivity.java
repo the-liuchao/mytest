@@ -108,18 +108,18 @@ public class MainActivity extends AppCompatActivity {
             parent.setEmail("the_liuchao@sina.cn");
             parent.setPhone("18216102786");
             parent.setTime(System.nanoTime() + "");
-            Parent tempParent =  db.findFirst(Parent.class);
-            if(tempParent!=null)
-            db.delete(tempParent);
+            Parent tempParent = db.findFirst(Parent.class);
+            if (tempParent != null)
+                db.delete(tempParent);
             Child child = new Child();
             child.setName("lisi");
             db.save(parent);
             child.setParentId(db.findFirst(Parent.class).getId());
             db.saveBindingId(child);     //保存对象关联数据库生成的id
             List<Child> children = db.selector(Child.class).findAll();
-            temp += "parentId:" + children.get(0).getParentId()+ "\n"+"child:"+children.get(0).toString()+"\n parentSize:"+db.findAll(Parent.class).size();
+            temp += "parentId:" + children.get(0).getParentId() + "\n" + "child:" + children.get(0).toString() + "\n parentSize:" + db.findAll(Parent.class).size();
             System.err.println(temp);
-            for (int i=0;i<children.size();i++){
+            for (int i = 0; i < children.size(); i++) {
                 System.err.println(children.get(i).toString());
             }
             parent = db.findFirst(Parent.class);
@@ -128,6 +128,4 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
 }
